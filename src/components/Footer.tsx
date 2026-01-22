@@ -34,15 +34,14 @@ const Footer = () => {
           </div>
           
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex flex-col items-center gap-1">
             <img 
               src="/logo.png" 
               alt="Revion" 
               className="h-10 w-auto"
             />
-            <span className="text-xl font-bold tracking-tight">
-              <span className="text-foreground">REV</span>
-              <span className="text-primary">ION</span>
+            <span className="text-xl font-heading font-black tracking-tight text-muted-foreground">
+              revion
             </span>
           </Link>
           
