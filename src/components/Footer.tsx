@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
@@ -33,10 +34,25 @@ const Footer = () => {
           </div>
           
           {/* Logo */}
-          <a href="#" className="text-xl font-bold tracking-tight">
-            <span className="text-foreground">REV</span>
-            <span className="text-primary">ION</span>
-          </a>
+          <Link to="/" className="flex items-center gap-2">
+            <img 
+              src="/logo.png" 
+              alt="Revion" 
+              className="h-10 w-auto"
+            />
+            <span className="text-xl font-bold tracking-tight">
+              <span className="text-foreground">REV</span>
+              <span className="text-primary">ION</span>
+            </span>
+          </Link>
+          
+          {/* Contact Link */}
+          <Link
+            to="/contact"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Contact Us
+          </Link>
           
           {/* Copyright */}
           <div className="text-center text-sm text-muted-foreground">

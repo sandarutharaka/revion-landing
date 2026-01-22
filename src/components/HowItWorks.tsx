@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Smartphone, Link, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -35,36 +36,93 @@ const HowItWorks = () => {
         }}
       />
       
+      {/* Racing speed lines */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-0.5 h-32 bg-gradient-to-b from-primary/30 via-primary/50 to-transparent"
+            style={{
+              left: `${10 + i * 12}%`,
+              top: `${20 + (i % 3) * 30}%`,
+            }}
+            animate={{
+              y: ["-100vh", "100vh"],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + i * 0.2,
+              repeat: Infinity,
+              delay: i * 0.3,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
+
       <div className="container relative z-10">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-gradient">
             How the NFC Tag Works
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Three simple steps. No apps needed. Just tap and share your passion.
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12 mb-12">
           {steps.map((step, index) => (
-            <div key={step.title} className="relative text-center group">
-              {/* Connector line */}
+            <motion.div 
+              key={step.title} 
+              className="relative text-center group"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
+            >
+              {/* Connector line with animation */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-16 left-1/2 w-full h-px bg-gradient-to-r from-primary/50 to-transparent" />
+                <motion.div 
+                  className="hidden md:block absolute top-16 left-1/2 w-full h-px bg-gradient-to-r from-primary/50 to-transparent"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
+                />
               )}
               
-              <div className="relative z-10 mb-6">
+              <motion.div 
+                className="relative z-10 mb-6"
+                whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                transition={{ duration: 0.3 }}
+              >
                 <div className="w-32 h-32 mx-auto rounded-full bg-card border border-border flex items-center justify-center group-hover:border-primary/50 transition-colors duration-300">
                   <step.icon className="w-12 h-12 text-primary" />
                 </div>
                 <span className="absolute -top-2 -right-2 md:right-1/4 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-sm font-bold text-primary-foreground">
                   {step.step}
                 </span>
-              </div>
+              </motion.div>
               
-              <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
+              <motion.h3 
+                className="text-2xl font-bold mb-3"
+                whileHover={{ scale: 1.05 }}
+              >
+                {step.title}
+              </motion.h3>
               <p className="text-muted-foreground">{step.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
         

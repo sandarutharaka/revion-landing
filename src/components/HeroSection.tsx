@@ -1,35 +1,79 @@
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/hero-hoodie.jpg";
 
 const HeroSection = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-secondary/20" />
       
       {/* Orange glow effect */}
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] pointer-events-none" />
+      <motion.div 
+        className="absolute top-1/3 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] pointer-events-none"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      {/* Speed lines effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent"
+            style={{
+              left: `${20 + i * 20}%`,
+            }}
+            animate={{
+              y: ["-100%", "100%"],
+              opacity: [0, 0.3, 0],
+            }}
+            transition={{
+              duration: 2 + i * 0.3,
+              repeat: Infinity,
+              delay: i * 0.2,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
       
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <div className="space-y-8 text-center lg:text-left">
+          <motion.div 
+            className="space-y-8 text-center lg:text-left"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full badge-glow text-sm font-medium">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               Coming Soon to Australia
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
-              <span className="text-gradient">Scan Me.</span>
+            <h1 className=" font-bold leading-tight tracking-tight">
+              <span className="text-gradient text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">Scan Me.</span>
               <br />
-              <span className="text-gradient-accent">Reveal the Ride.</span>
+              <span className="text-gradient-accent text-xl sm:text-2xl lg:text-3xl xl:text-4xl">Reveal the Ride.</span>
             </h1>
             
             <p className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0">
               Revion is an NFC-powered hoodie that links straight to your car portfolio.
               <span className="block mt-2 text-foreground/80">
-                One tap. Your builds, mods, and stories — all in one place.
+                One tap. Your builds, mods, and stories - all in one place.
               </span>
             </p>
             
@@ -53,10 +97,16 @@ const HeroSection = () => {
                 </a>
               </Button>
             </div>
-          </div>
+          </motion.div>
           
           {/* Hero Image */}
-          <div className="relative">
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            style={{ y }}
+          >
             <div className="relative aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden">
               <img
                 src={heroImage}
@@ -98,8 +148,19 @@ const HeroSection = () => {
             </div>
             
             {/* Floating accent */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/30 rounded-full blur-2xl animate-pulse-glow" />
-          </div>
+            <motion.div 
+              className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/30 rounded-full blur-2xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
         </div>
       </div>
     </section>

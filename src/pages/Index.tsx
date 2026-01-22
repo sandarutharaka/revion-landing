@@ -5,10 +5,12 @@ import HowItWorks from "@/components/HowItWorks";
 import ScanMeSection from "@/components/ScanMeSection";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
+import MouseNFCWave from "@/components/MouseNFCWave";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <MouseNFCWave />
       <Header />
       <main>
         <HeroSection />

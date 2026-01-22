@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Space Grotesk", "system-ui", "sans-serif"],
+        sans: ["Rubik", "system-ui", "sans-serif"],
+        heading: ["Venera", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

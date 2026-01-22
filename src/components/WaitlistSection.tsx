@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,9 +47,39 @@ const WaitlistSection = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
       <div className="absolute right-0 bottom-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       
+      {/* Racing speed lines */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-0.5 h-24 bg-gradient-to-b from-primary/20 via-primary/40 to-transparent"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${30 + (i % 2) * 40}%`,
+            }}
+            animate={{
+              y: ["-100vh", "100vh"],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: 2.5 + i * 0.2,
+              repeat: Infinity,
+              delay: i * 0.25,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
+
       <div className="container relative z-10">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
               <span className="text-gradient">Be First in the </span>
               <span className="text-gradient-accent">Pit Lane</span>
@@ -59,9 +90,15 @@ const WaitlistSection = () => {
                 Join the list for early access, launch dates, and limited-run offers.
               </span>
             </p>
-          </div>
+          </motion.div>
           
-          <div className="bg-card border border-border rounded-2xl p-8 md:p-10">
+          <motion.div 
+            className="bg-card border border-border rounded-2xl p-8 md:p-10"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             {isSubmitted ? (
               <div className="text-center py-8">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/20 flex items-center justify-center">
@@ -153,7 +190,7 @@ const WaitlistSection = () => {
                 </p>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

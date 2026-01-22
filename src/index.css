@@ -1,4 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* Fonts are loaded via link tags in index.html */
+
+/* Venera font for headings */
+@font-face {
+  font-family: 'Venera';
+  src: url('/fonts/Venera-100.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Venera';
+  src: url('/fonts/Venera-300.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Venera';
+  src: url('/fonts/Venera-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Venera';
+  src: url('/fonts/Venera-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Venera';
+  src: url('/fonts/Venera-900.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -63,7 +104,12 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Rubik', system-ui, sans-serif;
+  }
+
+  /* All headings use Venera */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Venera', system-ui, sans-serif;
   }
 }
 
